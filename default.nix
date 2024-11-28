@@ -21,11 +21,11 @@ rustPlatform.buildRustPackage {
   doCheck = false;
   src = pkgs.lib.cleanSource ./.;
   nativeBuildInputs = with pkgs; [
+    pkg-config
+  ];
+  buildInputs = with pkgs; [
     openssl
     pkg-config
     postgresql.lib
   ];
-  PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-  # OPENSSL_DIR = "${pkgs.openssl.dev}";
-  RUST_BACKTRACE = 1;
 }
