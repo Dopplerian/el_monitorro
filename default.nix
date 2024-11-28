@@ -25,7 +25,6 @@ rustPlatform.buildRustPackage {
   ];
   buildInputs = with pkgs; [
     openssl
-    pkg-config
     postgresql.lib
   ];
 }
