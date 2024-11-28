@@ -15,12 +15,24 @@
       rust-overlay,
       flake-utils,
     }:
-    flake-utils.lib.eachDefaultSystem (system: {
-      packages.default = import ./default.nix {
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ (import rust-overlay) ];
         };
-      };
-    });
+      in
+      rec {
+        packages.default = pkgs.callPackage ./default.nix { };
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [ packages.default ];
+          packages = with pkgs; [
+            diesel-cli
+            gnumake
+            docker # this still requires you to be running the docker daemon
+          ];
+        };
+      }
+    );
 }
