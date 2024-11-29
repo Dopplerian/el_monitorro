@@ -22,7 +22,8 @@ pkgs.rustPlatform.buildRustPackage {
     postgresql.lib
   ];
 
-  postInstall = '' # TODO: check if this is okay and necessary
+  postInstall = ''
+    # TODO: check if this is okay and necessary
     mv $out/bin/cleaner $out/bin/el_monitorro-cleaner
     mv $out/bin/deliver $out/bin/el_monitorro-deliver
     mv $out/bin/sync $out/bin/el_monitorro-sync
