@@ -22,6 +22,12 @@ pkgs.rustPlatform.buildRustPackage {
     postgresql.lib
   ];
 
+  postInstall = '' # TODO: check if this is okay and necessary
+    mv $out/bin/cleaner $out/bin/el_monitorro-cleaner
+    mv $out/bin/deliver $out/bin/el_monitorro-deliver
+    mv $out/bin/sync $out/bin/el_monitorro-sync
+  '';
+
   meta = {
     description = "El Monitorro is an RSS, Atom and JSON feed reader as a Telegram bot.";
     homepage = "https://github.com/ayrat555/el_monitorro";
