@@ -1,10 +1,10 @@
 { lib, config, ... }:
 
 let
-  cfg = config.elMonitorro;
+  cfg = config.services.el-monitorro;
 in
 {
-  options.elMonitorro = {
+  options.services.el-monitorro = {
     enable = lib.mkEnableOption "El Monitorro's general configuration";
   };
 
