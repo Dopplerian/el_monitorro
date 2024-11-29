@@ -1,20 +1,11 @@
 {
-  pkgs ? import <nixpkgs> {
-    overlays = [
-      (import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz"))
-    ];
-  },
+  pkgs ? import <nixpkgs> { },
   ...
 }:
 let
   toml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-  rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
-  rustPlatform = pkgs.makeRustPlatform {
-    cargo = rust;
-    rustc = rust;
-  };
 in
-rustPlatform.buildRustPackage {
+pkgs.rustPlatform.buildRustPackage {
   pname = toml.package.name;
   version = toml.package.version;
   cargoLock.lockFile = ./Cargo.lock;
