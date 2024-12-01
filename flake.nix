@@ -22,10 +22,10 @@
           inherit system;
         };
       in
-      rec {
+      {
         packages.default = pkgs.callPackage ./default.nix { };
         devShells.default = pkgs.mkShell {
-          inputsFrom = [ packages.default ];
+          inputsFrom = [ self.packages.${system}.default ];
           packages = with pkgs; [
             diesel-cli
             gnumake
