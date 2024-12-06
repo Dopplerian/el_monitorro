@@ -23,6 +23,7 @@
         };
       in
       {
+        formatter = pkgs.nixfmt-rfc-style;
         packages.default = pkgs.callPackage ./default.nix { };
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.default ];
